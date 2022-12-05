@@ -1,0 +1,94 @@
+@import url('https://fonts.googleapis.com/css2?family=Podkova:wght@400;500;600;700;800&display=swap');
+
+:root {
+    --clr1: rgb(236, 197, 113);
+    --clr2: rgb(138, 196, 230);
+    --clr3: rgb(221, 150, 92);
+    --clr4: rgb(209, 106, 106);
+    --clr5: rgb(245, 245, 245);
+}
+
+
+html,
+body {
+    font-family: "Podkova", serif;
+    margin: auto;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+}
+
+
+
+/*Styles for the overlay*/
+#blocker {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    /* background-color: rgba(170, 173, 201, 0.85); */
+    background: url(./assets/sword-in-stone.jpg) no-repeat;
+    background-position: 50% 0;
+    background-size: cover;
+}
+
+#instructions {
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    backdrop-filter: blur(4px);
+    background-color: rgba(0, 0, 0, 0.65);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+
+    text-align: start;
+    font-size: 18px;
+    cursor: pointer;
+}
+
+h1 {
+    color: var(--clr1);
+    font-size: 5em;
+    font-weight: 800;
+    text-transform: capitalize;
+    margin-bottom: 5px;
+}
+
+h2 {
+    color: var(--clr2);
+    font-size: 2em;
+}
+
+h3 {
+    color: var(--clr5);
+    font-size: 2.5em;
+    margin-bottom: 0px;
+}
+
+p {
+    color: var(--clr3);
+    font-size: 1.75em;
+    max-width: 600px;
+}
+
+.text {
+    font-size: 1.25em;
+    color: var(--clr5);
+    background: var(--clr3);
+    padding: 10px;
+}
+
+a {
+    color: var(--clr4);
+    padding: 10px;
+    margin-left: -10px;
+    transition: 0.2s ease;
+}
+
+a:hover {
+    background: var(--clr4);
+    color: var(--clr5);
+    transition: 0.2s ease;
+}
