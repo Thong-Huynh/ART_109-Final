@@ -157,7 +157,7 @@ function init() {
     );
 
     // Generate the ground
-    let floorGeometry = new THREE.PlaneGeometry(2000, 2000, 100, 100);
+    let floorGeometry = new THREE.PlaneGeometry(30, 2000, 10, 10);
     floorGeometry.rotateX(-Math.PI / 2);
 
     // Vertex displacement pattern for ground
