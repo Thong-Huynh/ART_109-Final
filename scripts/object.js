@@ -50,7 +50,7 @@ function init() {
     // Define basic scene parameters
     scene = new THREE.Scene();
     scene.background = new THREE.Color(0x9cbaad);
-    scene.fog = new THREE.Fog(0xb8d4c8, 0, 35);
+    scene.fog = new THREE.Fog(0xb8d4c8, 0, 150);
 
     // Define scene lighting
     const light1 = new THREE.HemisphereLight(0xffffff, 0x15450f, 1);
@@ -179,8 +179,8 @@ function init() {
     const colorsFloor = [];
 
     for (let i = 0, l = position.count; i < l; i++) {
-        // color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
-        color.setHSL(0xffffff, 0xffffff, 0xffffff);
+        color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
+        // color.setHSL(0x4f2f2f, 0xffffff, 0x2f5f7f);
         colorsFloor.push(color.r, color.g, color.b);
     }
 
@@ -199,9 +199,9 @@ function init() {
     scene.add(floor);
 
 
-    // First Image
+    // Image 1
     // Load image as texture
-    const texture = new THREE.TextureLoader().load('assets/sword-in-stone.jpg');
+    const texture = new THREE.TextureLoader().load('assets/IMG_0067.JPG');
     // Immediately use the texture for material creation
     const material = new THREE.MeshBasicMaterial({
         map: texture,
@@ -212,9 +212,46 @@ function init() {
     // Apply image texture to plane geometry
     const plane = new THREE.Mesh(geometry, material);
     // Position plane geometry
-    plane.position.set(0, 10, -15);
+    plane.position.set(0, 10, -20);
     // Place plane geometry
     scene.add(plane);
+
+
+    // Image 2
+    // Load image as texture
+    const texture2 = new THREE.TextureLoader().load('assets/IMG_0066.JPG');
+    // immediately use the texture for material creation
+    const material2 = new THREE.MeshBasicMaterial({
+        map: texture2,
+        side: THREE.DoubleSide
+    });
+    // Create plane geometry
+    const geometry2 = new THREE.PlaneGeometry(16, 9);
+    // Apply image texture to plane geometry
+    const plane2 = new THREE.Mesh(geometry2, material2);
+    // Position plane geometry
+    plane2.position.set(0, 10, -40);
+    // Place plane geometry
+    scene.add(plane2);
+
+
+    // Image 3
+    // Load image as texture
+    const texture3 = new THREE.TextureLoader().load('assets/Screenshot 3.jpg');
+    // immediately use the texture for material creation
+    const material3 = new THREE.MeshBasicMaterial({
+        map: texture3,
+        side: THREE.DoubleSide
+    });
+    // Create plane geometry
+    const geometry3 = new THREE.PlaneGeometry(16, 9);
+    // Apply image texture to plane geometry
+    const plane3 = new THREE.Mesh(geometry3, material3);
+    // Position plane geometry
+    plane3.position.set(0, 10, -60);
+    // Place plane geometry
+    scene.add(plane3);
+
 
 
 
@@ -222,7 +259,7 @@ function init() {
     var mesh;
     // Load preanimated model, add material, and add it to the scene
     const loader = new GLTFLoader().load(
-        "assets/s-i-s.glb",
+        "assets/",
         function (gltf) {
             gltf.scene.traverse(function (child) {
                 if (child.isMesh) {
