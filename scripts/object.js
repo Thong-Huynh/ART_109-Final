@@ -40,12 +40,12 @@ animate();
 function init() {
     // Establish the camera
     camera = new THREE.PerspectiveCamera(
-        75,
+        50,
         window.innerWidth / window.innerHeight,
-        1,
-        1000
+        2,
+        500
     );
-    camera.position.y = 5;
+    camera.position.y = 10;
 
     // Define basic scene parameters
     scene = new THREE.Scene();
@@ -199,6 +199,18 @@ function init() {
     scene.add(floor);
 
 
+    // Add a polygon to the scene
+    const geometry0 = new THREE.IcosahedronGeometry(150, 50);
+    const matLineBasic = new THREE.LineBasicMaterial({
+        color: 0xaa42f5,
+        linewidth: 10
+    });
+    const wireframe = new THREE.WireframeGeometry(geometry0);
+    const line = new THREE.LineSegments(wireframe, matLineBasic);
+    line.position.set(0, 0, -50);
+    scene.add(line);
+
+
     // Image 1
     // Load image as texture
     const texture = new THREE.TextureLoader().load('assets/Still-Export/bonsai.png');
@@ -209,18 +221,18 @@ function init() {
         transparent: true
     });
     // Create plane geometry
-    const geometry = new THREE.PlaneGeometry(5, 5);
+    const geometry = new THREE.PlaneGeometry(10, 10);
     // Apply image texture to plane geometry
     const plane = new THREE.Mesh(geometry, material);
     // Position plane geometry
-    plane.position.set(0, 8, -20);
+    plane.position.set(0, 7, -25);
     // Place plane geometry
     scene.add(plane);
 
 
     // Image 2
     // Load image as texture
-    const texture2 = new THREE.TextureLoader().load('assets/IMG_0066.JPG');
+    const texture2 = new THREE.TextureLoader().load('assets/Still-Export/screen-door-1.png');
     // immediately use the texture for material creation
     const material2 = new THREE.MeshBasicMaterial({
         map: texture2,
@@ -228,31 +240,149 @@ function init() {
         transparent: true
     });
     // Create plane geometry
-    const geometry2 = new THREE.PlaneGeometry(16, 9);
+    const geometry2 = new THREE.PlaneGeometry(18, 18);
     // Apply image texture to plane geometry
     const plane2 = new THREE.Mesh(geometry2, material2);
     // Position plane geometry
-    plane2.position.set(0, 10, -40);
+    plane2.position.set(0, 10, -50);
     // Place plane geometry
     scene.add(plane2);
 
 
     // Image 3
     // Load image as texture
-    const texture3 = new THREE.TextureLoader().load('assets/Screenshot 3.jpg');
+    const texture3 = new THREE.TextureLoader().load('assets/Still-Export/screen-door-2.png');
     // immediately use the texture for material creation
     const material3 = new THREE.MeshBasicMaterial({
         map: texture3,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
+        transparent: true
     });
     // Create plane geometry
-    const geometry3 = new THREE.PlaneGeometry(16, 9);
+    const geometry3 = new THREE.PlaneGeometry(15, 15);
     // Apply image texture to plane geometry
     const plane3 = new THREE.Mesh(geometry3, material3);
     // Position plane geometry
-    plane3.position.set(0, 10, -60);
+    plane3.position.set(1.5, 10, -51);
     // Place plane geometry
     scene.add(plane3);
+
+
+    // Image 4
+    // Load image as texture
+    const texture4 = new THREE.TextureLoader().load('assets/Still-Export/screen-door-3.png');
+    // immediately use the texture for material creation
+    const material4 = new THREE.MeshBasicMaterial({
+        map: texture4,
+        side: THREE.DoubleSide,
+        transparent: true
+    });
+    // Create plane geometry
+    const geometry4 = new THREE.PlaneGeometry(15, 15);
+    // Apply image texture to plane geometry
+    const plane4 = new THREE.Mesh(geometry4, material4);
+    // Position plane geometry
+    plane4.position.set(-3, 10, -52);
+    // Place plane geometry
+    scene.add(plane4);
+
+
+    // Image 5
+    // Load image as texture
+    const texture5 = new THREE.TextureLoader().load('assets/Still-Export/screen-door-4.png');
+    // immediately use the texture for material creation
+    const material5 = new THREE.MeshBasicMaterial({
+        map: texture5,
+        side: THREE.DoubleSide,
+        transparent: true
+    });
+    // Create plane geometry
+    const geometry5 = new THREE.PlaneGeometry(15, 15);
+    // Apply image texture to plane geometry
+    const plane5 = new THREE.Mesh(geometry5, material5);
+    // Position plane geometry
+    plane5.position.set(2, 10, -53);
+    // Place plane geometry
+    scene.add(plane5);
+
+
+    // Image 6
+    // Load image as texture
+    const texture6 = new THREE.TextureLoader().load('assets/Still-Export/cloud-1.png');
+    // immediately use the texture for material creation
+    const material6 = new THREE.MeshBasicMaterial({
+        map: texture6,
+        side: THREE.DoubleSide,
+        transparent: true
+    });
+    // Create plane geometry
+    const geometry6 = new THREE.PlaneGeometry(20, 20);
+    // Apply image texture to plane geometry
+    const plane6 = new THREE.Mesh(geometry6, material6);
+    // Position plane geometry
+    plane6.position.set(0, 10, -65);
+    // Place plane geometry
+    scene.add(plane6);
+
+
+    // Image 7
+    // Load image as texture
+    const texture7 = new THREE.TextureLoader().load('assets/Still-Export/cloud-2.png');
+    // immediately use the texture for material creation
+    const material7 = new THREE.MeshBasicMaterial({
+        map: texture7,
+        side: THREE.DoubleSide,
+        transparent: true
+    });
+    // Create plane geometry
+    const geometry7 = new THREE.PlaneGeometry(20, 20);
+    // Apply image texture to plane geometry
+    const plane7 = new THREE.Mesh(geometry7, material7);
+    // Position plane geometry
+    plane7.position.set(0, 10, -70);
+    // Place plane geometry
+    scene.add(plane7);
+
+
+    // Image 8
+    // Load image as texture
+    const texture8 = new THREE.TextureLoader().load('assets/Still-Export/cloud-3.png');
+    // immediately use the texture for material creation
+    const material8 = new THREE.MeshBasicMaterial({
+        map: texture8,
+        side: THREE.DoubleSide,
+        transparent: true
+    });
+    // Create plane geometry
+    const geometry8 = new THREE.PlaneGeometry(25, 25);
+    // Apply image texture to plane geometry
+    const plane8 = new THREE.Mesh(geometry8, material8);
+    // Position plane geometry
+    plane8.position.set(0, 10, -75);
+    // Place plane geometry
+    scene.add(plane8);
+
+
+    // Image 9
+    // Load image as texture
+    const texture9 = new THREE.TextureLoader().load('assets/Still-Export/cloud-4.png');
+    // immediately use the texture for material creation
+    const material9 = new THREE.MeshBasicMaterial({
+        map: texture9,
+        side: THREE.DoubleSide,
+        transparent: true
+    });
+    // Create plane geometry
+    const geometry9 = new THREE.PlaneGeometry(30, 30);
+    // Apply image texture to plane geometry
+    const plane9 = new THREE.Mesh(geometry9, material9);
+    // Position plane geometry
+    plane9.position.set(0, 10, -80);
+    // Place plane geometry
+    scene.add(plane9);
+
+
+
 
 
 
