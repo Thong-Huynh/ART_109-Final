@@ -45,7 +45,7 @@ function init() {
         1,
         1000
     );
-    camera.position.y = 10;
+    camera.position.y = 5;
 
     // Define basic scene parameters
     scene = new THREE.Scene();
@@ -205,7 +205,8 @@ function init() {
     // Immediately use the texture for material creation
     const material = new THREE.MeshBasicMaterial({
         map: texture,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
+        transparent: true
     });
     // Create plane geometry
     const geometry = new THREE.PlaneGeometry(5, 5);
@@ -223,7 +224,8 @@ function init() {
     // immediately use the texture for material creation
     const material2 = new THREE.MeshBasicMaterial({
         map: texture2,
-        side: THREE.DoubleSide
+        side: THREE.DoubleSide,
+        transparent: true
     });
     // Create plane geometry
     const geometry2 = new THREE.PlaneGeometry(16, 9);
@@ -328,8 +330,8 @@ function animate() {
         direction.x = Number(moveRight) - Number(moveLeft);
         direction.normalize(); // this ensures consistent movements in all directions
 
-        if (moveForward || moveBackward) velocity.z -= direction.z * 400.0 * delta;
-        if (moveLeft || moveRight) velocity.x -= direction.x * 400.0 * delta;
+        if (moveForward || moveBackward) velocity.z -= direction.z * 200.0 * delta;
+        if (moveLeft || moveRight) velocity.x -= direction.x * 200.0 * delta;
 
         if (onObject === true) {
             velocity.y = Math.max(0, velocity.y);
