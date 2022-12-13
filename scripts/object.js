@@ -179,7 +179,7 @@ function init() {
     const colorsFloor = [];
 
     for (let i = 0, l = position.count; i < l; i++) {
-        color.setHSL(Math.random() * 0.3 + 0.5, 0.75, Math.random() * 0.25 + 0.75);
+        color.setHSL(Math.random() * 0.5 + 0.75, Math.random() * 0.5 + 0.75, Math.random() * 0.5 + 0.75);
         // color.setHSL(0x4f2f2f, 0xffffff, 0x2f5f7f);
         colorsFloor.push(color.r, color.g, color.b);
     }
@@ -353,3 +353,4 @@ function animate() {
 
     renderer.render(scene, camera);
 }
+animate();
