@@ -201,18 +201,18 @@ function init() {
 
     // Image 1
     // Load image as texture
-    const texture = new THREE.TextureLoader().load('assets/IMG_0067.JPG');
+    const texture = new THREE.TextureLoader().load('assets/Still-Export/bonsai.png');
     // Immediately use the texture for material creation
     const material = new THREE.MeshBasicMaterial({
         map: texture,
         side: THREE.DoubleSide
     });
     // Create plane geometry
-    const geometry = new THREE.PlaneGeometry(16, 9);
+    const geometry = new THREE.PlaneGeometry(5, 5);
     // Apply image texture to plane geometry
     const plane = new THREE.Mesh(geometry, material);
     // Position plane geometry
-    plane.position.set(0, 10, -20);
+    plane.position.set(0, 8, -20);
     // Place plane geometry
     scene.add(plane);
 
