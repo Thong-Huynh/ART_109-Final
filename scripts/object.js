@@ -15,7 +15,7 @@ import {
 } from "../src/FontLoader.js"
 
 // Establish variables
-let camera, scene, renderer, controls, material;
+let camera, scene, renderer, controls, material, particle, mixer1, mixer2, mixer3, mixer4, mixer5;
 
 const objects = [];
 let raycaster;
@@ -40,7 +40,7 @@ animate();
 function init() {
     // Establish the camera
     camera = new THREE.PerspectiveCamera(
-        50,
+        65,
         window.innerWidth / window.innerHeight,
         2,
         500
@@ -49,8 +49,9 @@ function init() {
 
     // Define basic scene parameters
     scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x9cbaad);
-    scene.fog = new THREE.Fog(0xb8d4c8, 0, 150);
+    scene.background = new THREE.Color(0xe6e6e6);
+    scene.fog = new THREE.Fog(0xc7c7c7, 0, 200);
+    // scene.fog = new THREE.Fog(0xb8d4c8, 0, 200);
 
     // Define scene lighting
     const light1 = new THREE.HemisphereLight(0xffffff, 0x15450f, 1);
@@ -157,7 +158,7 @@ function init() {
     );
 
     // Generate the ground
-    let floorGeometry = new THREE.PlaneGeometry(30, 2000, 10, 10);
+    let floorGeometry = new THREE.PlaneGeometry(40, 2000, 10, 1);
     floorGeometry.rotateX(-Math.PI / 2);
 
     // Vertex displacement pattern for ground
@@ -181,7 +182,7 @@ function init() {
     for (let i = 0, l = position.count; i < l; i++) {
         color.setHSL(Math.random() * 0.5 + 0.75, Math.random() * 0.5 + 0.75, Math.random() * 0.5 + 0.75);
         // color.setHSL(0x4f2f2f, 0xffffff, 0x2f5f7f);
-        colorsFloor.push(color.r, color.g, color.b);
+        colorsFloor.push(color.b, color.b, color.b);
     }
 
     floorGeometry.setAttribute(
@@ -199,8 +200,9 @@ function init() {
     scene.add(floor);
 
 
+    // ---------------------------Dome-Net_texture---------------------------
     // Add a polygon to the scene
-    const geometry0 = new THREE.IcosahedronGeometry(150, 50);
+    const geometry0 = new THREE.IcosahedronGeometry(400, 50);
     const matLineBasic = new THREE.LineBasicMaterial({
         color: 0xaa42f5,
         linewidth: 10
@@ -211,6 +213,7 @@ function init() {
     scene.add(line);
 
 
+    // ---------------------------Bonsai---------------------------
     // Image 1
     // Load image as texture
     const texture = new THREE.TextureLoader().load('assets/Still-Export/bonsai.png');
@@ -230,6 +233,7 @@ function init() {
     scene.add(plane);
 
 
+    // ---------------------------Door---------------------------
     // Image 2
     // Load image as texture
     const texture2 = new THREE.TextureLoader().load('assets/Still-Export/screen-door-1.png');
@@ -244,7 +248,7 @@ function init() {
     // Apply image texture to plane geometry
     const plane2 = new THREE.Mesh(geometry2, material2);
     // Position plane geometry
-    plane2.position.set(0, 10, -50);
+    plane2.position.set(0, 12, -50);
     // Place plane geometry
     scene.add(plane2);
 
@@ -261,11 +265,17 @@ function init() {
     // Create plane geometry
     const geometry3 = new THREE.PlaneGeometry(15, 15);
     // Apply image texture to plane geometry
-    const plane3 = new THREE.Mesh(geometry3, material3);
+    // const plane3 = new THREE.Mesh(geometry3, material3);
     // Position plane geometry
-    plane3.position.set(1.5, 10, -51);
+    // plane3.position.set(1, 12, -51);
     // Place plane geometry
-    scene.add(plane3);
+    // scene.add(plane3);
+
+    mixer3 = new THREE.Object3D();
+    var mesh3 = new THREE.Mesh(geometry3, material3);
+    mixer3.add(mesh3);
+    mixer3.position.set(1, 12, -51);
+    scene.add(mixer3);
 
 
     // Image 4
@@ -280,11 +290,17 @@ function init() {
     // Create plane geometry
     const geometry4 = new THREE.PlaneGeometry(15, 15);
     // Apply image texture to plane geometry
-    const plane4 = new THREE.Mesh(geometry4, material4);
+    // const plane4 = new THREE.Mesh(geometry4, material4);
     // Position plane geometry
-    plane4.position.set(-3, 10, -52);
+    // plane4.position.set(-2, 12, -52);
     // Place plane geometry
-    scene.add(plane4);
+    // scene.add(plane4);
+
+    mixer4 = new THREE.Object3D();
+    var mesh4 = new THREE.Mesh(geometry4, material4);
+    mixer4.add(mesh4);
+    mixer4.position.set(-2, 12, -52);
+    scene.add(mixer4);
 
 
     // Image 5
@@ -301,11 +317,12 @@ function init() {
     // Apply image texture to plane geometry
     const plane5 = new THREE.Mesh(geometry5, material5);
     // Position plane geometry
-    plane5.position.set(2, 10, -53);
+    plane5.position.set(2, 12, -53);
     // Place plane geometry
     scene.add(plane5);
 
 
+    // ---------------------------Cloud---------------------------
     // Image 6
     // Load image as texture
     const texture6 = new THREE.TextureLoader().load('assets/Still-Export/cloud-1.png');
@@ -316,11 +333,11 @@ function init() {
         transparent: true
     });
     // Create plane geometry
-    const geometry6 = new THREE.PlaneGeometry(20, 20);
+    const geometry6 = new THREE.PlaneGeometry(25, 25);
     // Apply image texture to plane geometry
     const plane6 = new THREE.Mesh(geometry6, material6);
     // Position plane geometry
-    plane6.position.set(0, 10, -65);
+    plane6.position.set(0, 12, -70);
     // Place plane geometry
     scene.add(plane6);
 
@@ -335,11 +352,11 @@ function init() {
         transparent: true
     });
     // Create plane geometry
-    const geometry7 = new THREE.PlaneGeometry(20, 20);
+    const geometry7 = new THREE.PlaneGeometry(30, 30);
     // Apply image texture to plane geometry
     const plane7 = new THREE.Mesh(geometry7, material7);
     // Position plane geometry
-    plane7.position.set(0, 10, -70);
+    plane7.position.set(0, 15, -80);
     // Place plane geometry
     scene.add(plane7);
 
@@ -354,11 +371,11 @@ function init() {
         transparent: true
     });
     // Create plane geometry
-    const geometry8 = new THREE.PlaneGeometry(25, 25);
+    const geometry8 = new THREE.PlaneGeometry(35, 35);
     // Apply image texture to plane geometry
     const plane8 = new THREE.Mesh(geometry8, material8);
     // Position plane geometry
-    plane8.position.set(0, 10, -75);
+    plane8.position.set(0, 18, -90);
     // Place plane geometry
     scene.add(plane8);
 
@@ -373,45 +390,216 @@ function init() {
         transparent: true
     });
     // Create plane geometry
-    const geometry9 = new THREE.PlaneGeometry(30, 30);
+    const geometry9 = new THREE.PlaneGeometry(40, 40);
     // Apply image texture to plane geometry
     const plane9 = new THREE.Mesh(geometry9, material9);
     // Position plane geometry
-    plane9.position.set(0, 10, -80);
+    plane9.position.set(0, 20, -100);
     // Place plane geometry
     scene.add(plane9);
 
 
+    // ---------------------------Fish_pond---------------------------
+    // Image 10
+    // Load image as texture
+    const texture10 = new THREE.TextureLoader().load('assets/Still-Export/koi-fish-0.png');
+    // immediately use the texture for material creation
+    const material10 = new THREE.MeshBasicMaterial({
+        map: texture10,
+        side: THREE.DoubleSide,
+        transparent: true
+    });
+    // Create plane geometry
+    const geometry10 = new THREE.PlaneGeometry(20, 20);
+    // Apply image texture to plane geometry
+    // const plane10 = new THREE.Mesh(geometry10, material10);
+    // Position plane geometry
+    // plane10.position.set(0, 12, -130);
+    // Place plane geometry
+    // scene.add(plane10);
+
+    mixer5 = new THREE.Object3D();
+    var mesh5 = new THREE.Mesh(geometry10, material10);
+    mixer5.add(mesh5);
+    mixer5.position.set(0, 12, -130);
+    scene.add(mixer5);
+
+
+    // Image 11
+    // Load image as texture
+    const texture11 = new THREE.TextureLoader().load('assets/Still-Export/koi-fish-1.png');
+    // immediately use the texture for material creation
+    const material11 = new THREE.MeshBasicMaterial({
+        map: texture11,
+        side: THREE.DoubleSide,
+        transparent: true
+    });
+    // Create plane geometry
+    const geometry11 = new THREE.PlaneGeometry(20, 20);
+    // Apply image texture to plane geometry
+    const plane11 = new THREE.Mesh(geometry11, material11);
+    // Position plane geometry
+    plane11.position.set(0, 12, -131);
+    // Place plane geometry
+    scene.add(plane11);
+
+
+    // Image 12
+    // Load image as texture
+    const texture12 = new THREE.TextureLoader().load('assets/Still-Export/koi-fish-2.png');
+    // immediately use the texture for material creation
+    const material12 = new THREE.MeshBasicMaterial({
+        map: texture12,
+        side: THREE.DoubleSide,
+        transparent: true
+    });
+    // Create plane geometry
+    const geometry12 = new THREE.PlaneGeometry(20, 20);
+    // Apply image texture to plane geometry
+    const plane12 = new THREE.Mesh(geometry12, material12);
+    // Position plane geometry
+    plane12.position.set(0, 12, -132);
+    // Place plane geometry
+    scene.add(plane12);
+
+
+    // Image 13
+    // Load image as texture
+    const texture13 = new THREE.TextureLoader().load('assets/Still-Export/koi-fish-3.png');
+    // immediately use the texture for material creation
+    const material13 = new THREE.MeshBasicMaterial({
+        map: texture13,
+        side: THREE.DoubleSide,
+        transparent: true
+    });
+    // Create plane geometry
+    const geometry13 = new THREE.PlaneGeometry(21, 21);
+    // Apply image texture to plane geometry
+    const plane13 = new THREE.Mesh(geometry13, material13);
+    // Position plane geometry
+    plane13.position.set(0, 12, -133);
+    // Place plane geometry
+    scene.add(plane13);
+
+
+    // Image 14
+    // Load image as texture
+    const texture14 = new THREE.TextureLoader().load('assets/Still-Export/koi-fish-4.1.png');
+    // immediately use the texture for material creation
+    const material14 = new THREE.MeshBasicMaterial({
+        map: texture14,
+        side: THREE.DoubleSide,
+        transparent: true
+    });
+    // Create plane geometry
+    const geometry14 = new THREE.PlaneGeometry(20, 20);
+
+    mixer1 = new THREE.Object3D();
+    var mesh2 = new THREE.Mesh(geometry14, material14);
+    mixer1.add(mesh2);
+    mixer1.position.set(0, 12, -134);
+    scene.add(mixer1);
 
 
 
+    // Image 15
+    // Load image as texture
+    const texture15 = new THREE.TextureLoader().load('assets/Still-Export/koi-fish-4.2.png');
+    // immediately use the texture for material creation
+    const material15 = new THREE.MeshBasicMaterial({
+        map: texture15,
+        side: THREE.DoubleSide,
+        transparent: true
+    });
+    // Create plane geometry
+    const geometry15 = new THREE.PlaneGeometry(20, 20);
+
+    mixer2 = new THREE.Object3D();
+    var mesh2 = new THREE.Mesh(geometry15, material15);
+    mixer2.add(mesh2);
+    mixer2.position.set(0, 12, -135);
+    scene.add(mixer2);
 
 
-    // Adding 3D model---------------------------------------------------------
-    var mesh;
-    // Load preanimated model, add material, and add it to the scene
-    const loader = new GLTFLoader().load(
-        "assets/",
-        function (gltf) {
-            gltf.scene.traverse(function (child) {
-                if (child.isMesh) {
-                    // child.material = newMaterial;
-                }
-            });
-            // set position and scale
-            mesh = gltf.scene;
-            mesh.position.set(0, 6, -70);
-            mesh.rotation.set(0, 110, 0);
-            mesh.scale.set(.4, .4, .4);
-            // Add model to scene
-            scene.add(mesh);
+    // Image 16
+    // Load image as texture
+    const texture16 = new THREE.TextureLoader().load('assets/Still-Export/koi-fish-5.png');
+    // immediately use the texture for material creation
+    const material16 = new THREE.MeshBasicMaterial({
+        map: texture16,
+        side: THREE.DoubleSide,
+        transparent: true
+    });
+    // Create plane geometry
+    const geometry16 = new THREE.PlaneGeometry(25, 25);
+    // Apply image texture to plane geometry
+    const plane16 = new THREE.Mesh(geometry16, material16);
+    // Position plane geometry
+    plane16.position.set(-1.5, 11, -136);
+    // Place plane geometry
+    scene.add(plane16);
 
-        },
-        undefined,
-        function (error) {
-            console.error(error);
+
+
+    // Image 17
+    // Load image as texture
+    const texture17 = new THREE.TextureLoader().load('assets/Still-Export/bonsai-1.png');
+    // immediately use the texture for material creation
+    const material17 = new THREE.MeshBasicMaterial({
+        map: texture17,
+        side: THREE.DoubleSide,
+        transparent: true
+    });
+    // Create plane geometry
+    const geometry17 = new THREE.PlaneGeometry(7, 7);
+
+    particle = new THREE.Object3D();
+    scene.add(particle);
+    for (var i = 0; i < 1000; i++) {
+        var mesh1 = new THREE.Mesh(geometry17, material17);
+        mesh1.position.set(Math.random() - 0.5, Math.random() - 0.5, Math.random() - 0.5).normalize();
+        mesh1.position.multiplyScalar(90 + (Math.random() * 700));
+        mesh1.rotation.set(Math.random() * 2, Math.random() * 2, Math.random() * 2);
+        particle.add(mesh1);
+    }
+
+
+    // Adding Video
+    const video = document.getElementById('video');
+    const videoTexture = new THREE.VideoTexture(video);
+
+    var movieMaterial = new THREE.MeshBasicMaterial({
+        map: videoTexture,
+        side: THREE.FrontSide,
+        toneMapped: false,
+    });
+
+    let movieGeometry = new THREE.BoxGeometry(50, 50, 1);
+
+    let movieCubeScreen = new THREE.Mesh(movieGeometry, movieMaterial);
+
+    movieCubeScreen.position.set(0, 60, -50);
+    movieCubeScreen.rotation.set(-75, 0, 0);
+    scene.add(movieCubeScreen);
+
+    document.onkeydown = function (e) {
+        if (e.keyCode === 80) {
+            video.pause();
+        } else if (e.keyCode === 79) {
+            video.play();
         }
-    );
+    };
+
+    // document.onkeydown = function (event) {
+    //     switch (event.code) {
+    //         case "KeyP":
+    //             video.pause();
+    //             break;
+    //     }
+    // };
+
+
+
 
 
     // Define Rendered and html document placement
@@ -438,6 +626,34 @@ function onWindowResize() {
 function animate() {
     requestAnimationFrame(animate);
 
+    //fish
+    mixer1.rotation.z -= 0.003;
+    mixer2.rotation.z += 0.00125;
+    mixer5.rotation.z += 0.00025;
+
+
+    //door
+    if (mixer3.position.x <= 3) {
+        mixer3.position.x += 0.0025;
+    } else {
+        mixer3.position.x = 1
+    }
+
+    if (mixer4.position.x >= -3) {
+        mixer4.position.x -= 0.003;
+    } else {
+        mixer4.position.x = -2
+    }
+
+
+    //particle
+    particle.rotation.x += 0.0005;
+    particle.rotation.y += 0.0005;
+    particle.rotation.z -= 0.001;
+
+    // controls.update();
+    // videoTexture.needsUpdate = true;
+
     const time = performance.now();
 
     // Check for controls being activated (locked) and animate scene according to controls
@@ -460,8 +676,8 @@ function animate() {
         direction.x = Number(moveRight) - Number(moveLeft);
         direction.normalize(); // this ensures consistent movements in all directions
 
-        if (moveForward || moveBackward) velocity.z -= direction.z * 200.0 * delta;
-        if (moveLeft || moveRight) velocity.x -= direction.x * 200.0 * delta;
+        if (moveForward || moveBackward) velocity.z -= direction.z * 250.0 * delta;
+        if (moveLeft || moveRight) velocity.x -= direction.x * 250.0 * delta;
 
         if (onObject === true) {
             velocity.y = Math.max(0, velocity.y);
