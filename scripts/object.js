@@ -115,10 +115,10 @@ function init() {
                 moveRight = true;
                 break;
 
-            case "Space":
-                if (canJump === true) velocity.y += 200;
-                canJump = false;
-                break;
+                // case "Space":
+                //     if (canJump === true) velocity.y += 200;
+                //     canJump = false;
+                //     break;
         }
     };
 
@@ -574,7 +574,7 @@ function init() {
         toneMapped: false,
     });
 
-    let movieGeometry = new THREE.BoxGeometry(50, 50, 1);
+    let movieGeometry = new THREE.BoxGeometry(60, 60, 1);
 
     let movieCubeScreen = new THREE.Mesh(movieGeometry, movieMaterial);
 
@@ -583,22 +583,12 @@ function init() {
     scene.add(movieCubeScreen);
 
     document.onkeydown = function (e) {
-        if (e.keyCode === 80) {
+        if (e.keyCode === 32) {
             video.pause();
-        } else if (e.keyCode === 79) {
+        } else if (e.keyCode === 80) {
             video.play();
         }
     };
-
-    // document.onkeydown = function (event) {
-    //     switch (event.code) {
-    //         case "KeyP":
-    //             video.pause();
-    //             break;
-    //     }
-    // };
-
-
 
 
 
